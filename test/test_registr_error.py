@@ -7,13 +7,11 @@ from faker import Faker
 
 faker = Faker()
 
-class TestBurgers:
+class TestError:
     #Тест на корроткий пароль
     def test_reg_short_password(self, driver):
         email = faker.email()
         password = "12345"
-        print(email)
-        print(password)
         # Нажимаем на ЛК
         driver.find_element(*Locators.LK_BUTTOM).click()
         driver.find_element(By.XPATH,"//div/p/a[text()= 'Зарегистрироваться']").click()
@@ -21,6 +19,5 @@ class TestBurgers:
         driver.find_element(By.XPATH, '//div/form//fieldset[2]//input').send_keys(email)
         driver.find_element(By.XPATH,'//div/form//fieldset[3]//input').send_keys(password)
         driver.find_element(By.XPATH, '//main/div/form/button').click()
-        error_pwd = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/main/div/form/fieldset[3]/div/p'))).text
-        print(error_pwd)
+        error_pwd = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//p[@class = "input__error text_type_main-default"]'))).text
         assert error_pwd == "Некорректный пароль"

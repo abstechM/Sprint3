@@ -6,7 +6,7 @@ from locators import Locators
 from faker import Faker
 
 faker = Faker()
-class TestBurgers:
+class TestnEnter:
     #Вход чрезе кнопку Личный кабинет
     def test_enter_lk_button(self, driver):
         driver.find_element(*Locators.LK_BUTTOM).click()
@@ -30,7 +30,7 @@ class TestBurgers:
         email = faker.email()
         password = 123456
         driver.find_element(*Locators.ENTER_BUTTON).click()
-        driver.find_element(By.XPATH, '//div/div/p[1]/a').click()
+        driver.find_element(By.XPATH, '//a[@href = "/register"]').click()
         driver.find_element(By.XPATH, '//form/fieldset[1]//input').send_keys('Alexander')
         driver.find_element(By.XPATH, '//form/fieldset[2]//input').send_keys(email)
         driver.find_element(By.XPATH, '//form/fieldset[3]//input').send_keys(password)
@@ -47,7 +47,7 @@ class TestBurgers:
     def test_psw_recovey(self, driver):
         email = faker.email()
         driver.find_element(*Locators.ENTER_BUTTON).click()
-        driver.find_element(By.XPATH, '//main/div/div/p[2]/a').click()
+        driver.find_element(By.XPATH, '//a[@href = "/forgot-password"]').click()
         driver.find_element(By.XPATH, '//main//div/div/input').send_keys(email)
         driver.find_element(By.XPATH, '//form/button').click()
         assert driver.find_element(By.XPATH, '//main/div/h2').text == "Восстановление пароля"

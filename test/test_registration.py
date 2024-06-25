@@ -8,29 +8,27 @@ from faker import Faker
 faker = Faker()
 
 class TestBurgers:
-    def test_registration(self, driver):
+    def test_registration_successful(self, driver):
         email = faker.email()
         password = Constants.PASSWORD
-        print(email)
-        print(password)
         #Нажимаем на ЛК
         driver.find_element(*Locators.LK_BUTTOM).click()
 
         #Нажимаем регистрация
-        driver.find_element(By.XPATH, '//*[@id="root"]/div/main/div/div/p[1]/a').click()
+        driver.find_element(By.XPATH, '//a[@href = "/register"]').click()
         #Вводим имя
-        driver.find_element(By.XPATH, '//*[@id="root"]/div/main/div/form/fieldset[1]/div/div/input').send_keys('Alexander')
+        driver.find_element(By.XPATH, '//form/fieldset[1]/div/div/input').send_keys('Alexander')
         #Вводим email
-        driver.find_element(By.XPATH, '//*[@id="root"]/div/main/div/form/fieldset[2]/div/div/input').send_keys(email)
+        driver.find_element(By.XPATH, '//form/fieldset[2]/div/div/input').send_keys(email)
         #Вводим пароль
-        driver.find_element(By.XPATH, '//*[@id="root"]/div/main/div/form/fieldset[3]/div/div/input').send_keys(password)
+        driver.find_element(By.XPATH, '//form/fieldset[3]/div/div/input').send_keys(password)
         #Нажимаем Зарегистрироваться
-        driver.find_element(By.XPATH, '//*[@id="root"]/div/main/div/form/button').click()
+        driver.find_element(By.XPATH, '//main/div/form//button').click()
 
         #Вводим email
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//fieldset[1]/div//input'))).send_keys(email)
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.EMAIL)).send_keys(email)
         #Вводим пароль
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//fieldset[2]/div//input'))).send_keys(password)
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.PASSWORD)).send_keys(password)
         #Нажмаем войти
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Войти'))).click()
 
@@ -40,7 +38,7 @@ class TestBurgers:
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.LK_BUTTOM)).click()
 
         #Проверяем что в личном кабинете есть наш e-mail
-        assert WebDriverWait(driver, 5).until(EC.text_to_be_present_in_element_attribute((By.XPATH, '//ul/li[2]//input'), 'disable value',f'{email}'))
+        assert WebDriverWait(driver, 5).until(EC.text_to_be_present_in_element_attribute((By.XPATH, '//input[@type = "text" and @name = "name"]'), 'disable value',f'{email}'))
 
 
 
