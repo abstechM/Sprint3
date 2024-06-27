@@ -19,7 +19,7 @@ def driver():
 @pytest.fixture
 def login(driver):
     driver.find_element(*Locators.LK_BUTTOM).click()
-    WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.EMAIL)).send_keys(Constants.EMAIL)
-    WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.PASSWORD)).send_keys(Constants.PASSWORD)
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.NAME, 'name'))).send_keys(Constants.EMAIL)
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.NAME, 'Пароль'))).send_keys(Constants.PASSWORD)
     driver.find_element(By.XPATH, '//main/div/form/button').click()
     return driver

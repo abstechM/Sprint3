@@ -1,8 +1,7 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from constants import Constants
-from locators import Locators
+
 from faker import Faker
 
 faker = Faker()
@@ -13,7 +12,7 @@ class TestError:
         email = faker.email()
         password = "12345"
         # Нажимаем на ЛК
-        driver.find_element(*Locators.LK_BUTTOM).click()
+        driver.find_element(By.LINK_TEXT, 'Личный Кабинет').click()
         driver.find_element(By.XPATH,"//div/p/a[text()= 'Зарегистрироваться']").click()
         driver.find_element(By.XPATH,'//div/form//fieldset[1]//input').send_keys('Alexander')
         driver.find_element(By.XPATH, '//div/form//fieldset[2]//input').send_keys(email)
