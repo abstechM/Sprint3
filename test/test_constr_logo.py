@@ -8,11 +8,11 @@ class TestConstructer:
     def test_constr(self, login):
         driver = login
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.LK_BUTTOM)).click()
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//li/a[@href = "/"]'))).click()
-        assert driver.find_element(By.XPATH, '//main/section/h1').text == "Соберите бургер"
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.BUTTON_CONSTR)).click()
+        assert driver.find_element(Locators.HEADER).text == "Соберите бургер"
     #Тестирование перехода по ЛОГО
     def test_logo(self, login):
         driver = login
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.LK_BUTTOM)).click()
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//a[@class = "active"]'))).click()
-        assert driver.find_element(By.XPATH, '//main/section/h1').text == "Соберите бургер"
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.LOGO)).click()
+        assert driver.find_element(Locators.HEADER).text == "Соберите бургер"

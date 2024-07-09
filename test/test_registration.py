@@ -14,13 +14,13 @@ class TestRegistration:
         driver.find_element(Locators.LK_BUTTOM).click()
 
         #Нажимаем регистрация
-        driver.find_element(By.XPATH, '//a[@href = "/register"]').click()
+        driver.find_element(*Locators.BUTTON_REGISTRATION).click()
         #Вводим имя
-        driver.find_element(By.XPATH, '//form/fieldset[1]/div/div/input').send_keys('Alexander')
+        driver.find_element(*Locators.INPUT_NAME_REG).send_keys('Alexander')
         #Вводим email
-        driver.find_element(By.XPATH, '//form/fieldset[2]/div/div/input').send_keys(email)
+        driver.find_element(*Locators.INPUT_EMAIL_REG).send_keys(email)
         #Вводим пароль
-        driver.find_element(By.XPATH, '//form/fieldset[3]/div/div/input').send_keys(password)
+        driver.find_element(*Locators.INPUT_PSW_REG).send_keys(password)
         #Нажимаем Зарегистрироваться
         driver.find_element(Locators.ENT_BUTT_LOGIN).click()
 
@@ -37,7 +37,7 @@ class TestRegistration:
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.LK_BUTTOM)).click()
 
         #Проверяем что в личном кабинете есть наш e-mail
-        assert WebDriverWait(driver, 5).until(EC.text_to_be_present_in_element_attribute((By.XPATH, '//input[@type = "text" and @name = "name"]'), 'disable value',f'{email}'))
+        assert WebDriverWait(driver, 5).until(EC.text_to_be_present_in_element_attribute(Locators.INPUT_LK, 'disable value',f'{email}'))
 
 
 
