@@ -22,4 +22,3 @@ def login(driver):
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.EMAIL)).send_keys(Constants.EMAIL)
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Locators.PASSWORD)).send_keys(Constants.PASSWORD)
     driver.find_element(Locators.ENT_BUTT_LOGIN).click()
-    return driver
